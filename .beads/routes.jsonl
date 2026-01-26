@@ -1,4 +1,7 @@
 {"prefix":"hq-","path":"."}
 {"prefix":"hq-cv-","path":"."}
 {"prefix":"ic-","path":"icecream/mayor/rig"}
+{"prefix":"pa-","path":"panels"}
 {"prefix":"ca-","path":"careops"}
+{"prefix":"gt-","path":"gastown/mayor/rig"}
+{"prefix":"sol-","path":"sol"}

@@ -1,0 +1,805 @@
+2026/01/23 11:45:20 Loaded patrol config from /Users/jb/gt/mayor/daemon.json
+2026/01/23 11:45:20 Daemon starting (PID 74158)
+2026/01/23 11:45:20 Daemon running, recovery heartbeat interval 3m0s
+2026/01/23 11:45:20 Feed curator started
+2026/01/23 11:45:20 Convoy watcher started
+2026/01/23 11:45:20 Heartbeat starting (recovery-focused)
+2026/01/23 11:45:20 Spawning Boot for triage...
+2026/01/23 11:45:20 Boot spawned successfully
+2026/01/23 11:45:20 Deacon heartbeat is stale (20h54m0s old), checking session...
+2026/01/23 11:45:20 Deacon stuck for 20h54m0s - restarting session
+2026/01/23 11:45:20 convoy watcher: detected close of hq-jbo
+2026/01/23 11:45:20 convoy watcher: detected close of hq-jbo
+2026/01/23 11:45:20 convoy watcher: detected close of hq-mcj
+2026/01/23 11:45:20 convoy watcher: detected close of hq-mcj
+2026/01/23 11:45:20 convoy watcher: detected close of hq-24i
+2026/01/23 11:45:20 convoy watcher: detected close of hq-24i
+2026/01/23 11:45:20 convoy watcher: detected close of hq-swh
+2026/01/23 11:45:20 convoy watcher: detected close of hq-swh
+2026/01/23 11:45:20 convoy watcher: detected close of hq-blp
+2026/01/23 11:45:20 convoy watcher: detected close of hq-blp
+2026/01/23 11:45:20 convoy watcher: detected close of hq-zjz
+2026/01/23 11:45:20 convoy watcher: detected close of hq-zjz
+2026/01/23 11:45:20 convoy watcher: detected close of hq-1h9
+2026/01/23 11:45:20 convoy watcher: detected close of hq-1h9
+2026/01/23 11:45:20 convoy watcher: detected close of ca-e74
+2026/01/23 11:45:20 convoy watcher: detected close of ca-a8z
+2026/01/23 11:45:20 convoy watcher: detected close of ca-2ft
+2026/01/23 11:45:20 convoy watcher: detected close of ca-7ba
+2026/01/23 11:45:20 convoy watcher: detected close of ca-ic6
+2026/01/23 11:45:20 convoy watcher: detected close of ca-zvu
+2026/01/23 11:45:20 convoy watcher: detected close of ca-03s
+2026/01/23 11:45:20 convoy watcher: detected close of hq-lpa
+2026/01/23 11:45:20 convoy watcher: detected close of hq-lpa
+2026/01/23 11:45:20 convoy watcher: detected close of hq-gjn
+2026/01/23 11:45:20 convoy watcher: detected close of hq-gjn
+2026/01/23 11:45:20 convoy watcher: detected close of hq-de4
+2026/01/23 11:45:20 convoy watcher: detected close of hq-de4
+2026/01/23 11:45:20 convoy watcher: detected close of hq-aqi
+2026/01/23 11:45:20 convoy watcher: detected close of hq-aqi
+2026/01/23 11:45:20 convoy watcher: detected close of hq-g6d
+2026/01/23 11:45:20 convoy watcher: detected close of hq-g6d
+2026/01/23 11:45:20 convoy watcher: detected close of hq-4xx
+2026/01/23 11:45:20 convoy watcher: detected close of hq-4xx
+2026/01/23 11:45:20 convoy watcher: detected close of hq-opk
+2026/01/23 11:45:20 convoy watcher: detected close of hq-opk
+2026/01/23 11:45:20 convoy watcher: detected close of hq-o59
+2026/01/23 11:45:20 convoy watcher: detected close of hq-o59
+2026/01/23 11:45:20 convoy watcher: detected close of ca-ctg
+2026/01/23 11:45:20 convoy watcher: ca-ctg is tracked by 1 convoy(s): [hq-cv-gsnne]
+2026/01/23 11:45:20 convoy watcher: detected close of ca-8h4
+2026/01/23 11:45:20 convoy watcher: ca-8h4 is tracked by 1 convoy(s): [hq-cv-gsnne]
+2026/01/23 11:45:20 convoy watcher: detected close of ca-g9h
+2026/01/23 11:45:20 convoy watcher: ca-g9h is tracked by 1 convoy(s): [hq-cv-gsnne]
+2026/01/23 11:45:20 convoy watcher: detected close of ca-fob
+2026/01/23 11:45:20 convoy watcher: ca-fob is tracked by 1 convoy(s): [hq-cv-gsnne]
+2026/01/23 11:45:20 convoy watcher: detected close of ca-z45
+2026/01/23 11:45:20 convoy watcher: ca-z45 is tracked by 1 convoy(s): [hq-cv-gsnne]
+2026/01/23 11:45:20 convoy watcher: detected close of ca-bjoe
+2026/01/23 11:45:20 convoy watcher: detected close of hq-cv-gsnne
+2026/01/23 11:45:20 convoy watcher: detected close of hq-cv-gsnne
+2026/01/23 11:45:25 Deacon started successfully
+2026/01/23 11:45:25 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:45:25 Witness for careops already running, skipping spawn
+2026/01/23 11:45:25 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:45:25 Witness for icecream already running, skipping spawn
+2026/01/23 11:45:25 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:45:25 Refinery for careops already running, skipping spawn
+2026/01/23 11:45:25 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:45:25 Refinery for icecream already running, skipping spawn
+2026/01/23 11:45:27 CRASH DETECTED: polecat careops/nitro has hook_bead=ca-jatb but session gt-careops-nitro is dead
+2026/01/23 11:45:27 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:45:31 Successfully restarted crashed polecat careops/nitro
+2026/01/23 11:45:33 Heartbeat complete (#1)
+2026/01/23 11:48:20 Heartbeat starting (recovery-focused)
+2026/01/23 11:48:20 Spawning Boot for triage...
+2026/01/23 11:48:20 Boot spawned successfully
+2026/01/23 11:48:20 Deacon started recently (2m55s ago), skipping heartbeat check
+2026/01/23 11:48:20 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:48:20 Witness for careops already running, skipping spawn
+2026/01/23 11:48:20 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:48:20 Witness for icecream already running, skipping spawn
+2026/01/23 11:48:20 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:48:20 Refinery for careops already running, skipping spawn
+2026/01/23 11:48:20 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:48:20 Refinery for icecream already running, skipping spawn
+2026/01/23 11:48:23 Heartbeat complete (#2)
+2026/01/23 11:50:53 convoy watcher: detected close of hq-cozw
+2026/01/23 11:50:53 convoy watcher: detected close of hq-cozw
+2026/01/23 11:51:23 Heartbeat starting (recovery-focused)
+2026/01/23 11:51:23 Boot already running, skipping spawn
+2026/01/23 11:51:23 Deacon heartbeat is stale (21h0m0s old), checking session...
+2026/01/23 11:51:23 Deacon stuck for 21h0m0s - restarting session
+2026/01/23 11:51:28 Deacon started successfully
+2026/01/23 11:51:28 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:51:28 Witness for careops already running, skipping spawn
+2026/01/23 11:51:28 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:51:28 Witness for icecream already running, skipping spawn
+2026/01/23 11:51:28 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:51:28 Refinery for icecream already running, skipping spawn
+2026/01/23 11:51:28 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:51:28 Refinery for careops already running, skipping spawn
+2026/01/23 11:51:31 Heartbeat complete (#3)
+2026/01/23 11:52:03 convoy watcher: detected close of ca-mjg9
+2026/01/23 11:52:03 convoy watcher: detected close of ca-iywb
+2026/01/23 11:54:31 Heartbeat starting (recovery-focused)
+2026/01/23 11:54:31 Boot already running, skipping spawn
+2026/01/23 11:54:31 Deacon started recently (3m3s ago), skipping heartbeat check
+2026/01/23 11:54:31 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:54:31 Witness for careops already running, skipping spawn
+2026/01/23 11:54:31 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:54:31 Witness for icecream already running, skipping spawn
+2026/01/23 11:54:31 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:54:31 Refinery for icecream already running, skipping spawn
+2026/01/23 11:54:31 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:54:31 Refinery for careops already running, skipping spawn
+2026/01/23 11:54:33 Heartbeat complete (#4)
+2026/01/23 11:55:56 convoy watcher: detected close of ca-vbax
+2026/01/23 11:56:05 convoy watcher: detected close of hq-hewi
+2026/01/23 11:56:05 convoy watcher: detected close of hq-hewi
+2026/01/23 11:57:33 Heartbeat starting (recovery-focused)
+2026/01/23 11:57:33 Boot already running, skipping spawn
+2026/01/23 11:57:33 Deacon heartbeat is stale (21h6m0s old), checking session...
+2026/01/23 11:57:33 Deacon stuck for 21h6m0s - restarting session
+2026/01/23 11:57:38 Deacon started successfully
+2026/01/23 11:57:38 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:57:38 Witness for icecream already running, skipping spawn
+2026/01/23 11:57:38 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:57:38 Witness for careops already running, skipping spawn
+2026/01/23 11:57:38 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 11:57:38 Refinery for careops already running, skipping spawn
+2026/01/23 11:57:38 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 11:57:38 Refinery for icecream already running, skipping spawn
+2026/01/23 11:57:40 Heartbeat complete (#5)
+2026/01/23 11:58:31 convoy watcher: detected close of hq-dmje
+2026/01/23 11:58:31 convoy watcher: detected close of hq-dmje
+2026/01/23 12:00:40 Heartbeat starting (recovery-focused)
+2026/01/23 12:00:40 Boot already running, skipping spawn
+2026/01/23 12:00:40 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 12:00:40 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:00:40 Witness for careops already running, skipping spawn
+2026/01/23 12:00:40 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:00:40 Witness for icecream already running, skipping spawn
+2026/01/23 12:00:40 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:00:40 Refinery for careops already running, skipping spawn
+2026/01/23 12:00:40 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:00:40 Refinery for icecream already running, skipping spawn
+2026/01/23 12:00:42 Heartbeat complete (#6)
+2026/01/23 12:01:58 convoy watcher: detected close of hq-xgjy
+2026/01/23 12:03:42 Heartbeat starting (recovery-focused)
+2026/01/23 12:03:42 Boot already running, skipping spawn
+2026/01/23 12:03:42 Deacon heartbeat is stale (21h12m0s old), checking session...
+2026/01/23 12:03:42 Deacon stuck for 21h12m0s - restarting session
+2026/01/23 12:03:48 Deacon started successfully
+2026/01/23 12:03:48 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:03:48 Witness for careops already running, skipping spawn
+2026/01/23 12:03:48 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:03:48 Witness for icecream already running, skipping spawn
+2026/01/23 12:03:48 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:03:48 Refinery for careops already running, skipping spawn
+2026/01/23 12:03:48 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:03:48 Refinery for icecream already running, skipping spawn
+2026/01/23 12:03:50 Heartbeat complete (#7)
+2026/01/23 12:04:25 convoy watcher: detected close of ca-tq5l
+2026/01/23 12:04:28 convoy watcher: detected close of ca-3mv5
+2026/01/23 12:04:28 convoy watcher: ca-3mv5 is tracked by 1 convoy(s): [hq-cv-22vbg]
+2026/01/23 12:04:28 convoy watcher: running completion check for hq-cv-22vbg
+2026/01/23 12:04:29 convoy watcher: ✓ Auto-closed convoy 🚚 hq-cv-22vbg: phase-2-track-library
+2026/01/23 12:04:29 convoy watcher: detected close of ca-hzhj
+2026/01/23 12:04:29 convoy watcher: ca-hzhj is tracked by 1 convoy(s): [hq-cv-22vbg]
+2026/01/23 12:04:29 convoy watcher: detected close of ca-jatb
+2026/01/23 12:04:29 convoy watcher: ca-jatb is tracked by 1 convoy(s): [hq-cv-22vbg]
+2026/01/23 12:04:29 convoy watcher: detected close of ca-m35p
+2026/01/23 12:04:29 convoy watcher: ca-m35p is tracked by 1 convoy(s): [hq-cv-22vbg]
+2026/01/23 12:04:29 convoy watcher: detected close of ca-770o
+2026/01/23 12:04:29 convoy watcher: ca-770o is tracked by 1 convoy(s): [hq-cv-22vbg]
+2026/01/23 12:04:29 convoy watcher: detected close of hq-cv-22vbg
+2026/01/23 12:04:29 convoy watcher: detected close of hq-cv-22vbg
+2026/01/23 12:06:50 Heartbeat starting (recovery-focused)
+2026/01/23 12:06:50 Boot already running, skipping spawn
+2026/01/23 12:06:50 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 12:06:50 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:06:50 Witness for careops already running, skipping spawn
+2026/01/23 12:06:50 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:06:50 Witness for icecream already running, skipping spawn
+2026/01/23 12:06:50 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:06:50 Refinery for careops already running, skipping spawn
+2026/01/23 12:06:50 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:06:50 Refinery for icecream already running, skipping spawn
+2026/01/23 12:06:51 Heartbeat complete (#8)
+2026/01/23 12:06:55 convoy watcher: detected close of hq-cv-yuxw4
+2026/01/23 12:06:55 convoy watcher: detected close of hq-cv-yuxw4
+2026/01/23 12:08:23 convoy watcher: detected close of hq-3c38
+2026/01/23 12:08:23 convoy watcher: detected close of hq-3c38
+2026/01/23 12:09:51 Heartbeat starting (recovery-focused)
+2026/01/23 12:09:51 Boot already running, skipping spawn
+2026/01/23 12:09:51 Deacon heartbeat is stale (21h18m0s old), checking session...
+2026/01/23 12:09:51 Deacon stuck for 21h18m0s - restarting session
+2026/01/23 12:09:57 Deacon started successfully
+2026/01/23 12:09:57 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:09:57 Witness for careops already running, skipping spawn
+2026/01/23 12:09:57 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:09:57 Witness for icecream already running, skipping spawn
+2026/01/23 12:09:57 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:09:57 Refinery for icecream already running, skipping spawn
+2026/01/23 12:09:57 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:09:57 Refinery for careops already running, skipping spawn
+2026/01/23 12:09:58 Heartbeat complete (#9)
+2026/01/23 12:12:24 convoy watcher: detected close of hq-sgr
+2026/01/23 12:12:24 convoy watcher: detected close of hq-sgr
+2026/01/23 12:12:24 convoy watcher: detected close of hq-dar
+2026/01/23 12:12:24 convoy watcher: detected close of hq-dar
+2026/01/23 12:12:24 convoy watcher: detected close of hq-nkw
+2026/01/23 12:12:24 convoy watcher: detected close of hq-nkw
+2026/01/23 12:12:25 convoy watcher: detected close of hq-l9e
+2026/01/23 12:12:25 convoy watcher: detected close of hq-l9e
+2026/01/23 12:12:25 convoy watcher: detected close of hq-l5l
+2026/01/23 12:12:25 convoy watcher: detected close of hq-l5l
+2026/01/23 12:12:25 convoy watcher: detected close of hq-v5e
+2026/01/23 12:12:25 convoy watcher: detected close of hq-v5e
+2026/01/23 12:12:25 convoy watcher: detected close of hq-d2m
+2026/01/23 12:12:25 convoy watcher: detected close of hq-d2m
+2026/01/23 12:12:25 convoy watcher: detected close of hq-cas
+2026/01/23 12:12:25 convoy watcher: detected close of hq-cas
+2026/01/23 12:12:35 convoy watcher: detected close of hq-dha9
+2026/01/23 12:12:35 convoy watcher: detected close of hq-dha9
+2026/01/23 12:12:35 convoy watcher: detected close of hq-s0u2
+2026/01/23 12:12:35 convoy watcher: detected close of hq-s0u2
+2026/01/23 12:12:35 convoy watcher: detected close of hq-8rcj
+2026/01/23 12:12:35 convoy watcher: detected close of hq-8rcj
+2026/01/23 12:12:35 convoy watcher: detected close of hq-c9a3
+2026/01/23 12:12:35 convoy watcher: detected close of hq-c9a3
+2026/01/23 12:12:35 convoy watcher: detected close of hq-dmr
+2026/01/23 12:12:35 convoy watcher: detected close of hq-dmr
+2026/01/23 12:12:35 convoy watcher: detected close of hq-vl4
+2026/01/23 12:12:35 convoy watcher: detected close of hq-vl4
+2026/01/23 12:12:35 convoy watcher: detected close of hq-xkh
+2026/01/23 12:12:35 convoy watcher: detected close of hq-xkh
+2026/01/23 12:12:36 convoy watcher: detected close of hq-0sd
+2026/01/23 12:12:36 convoy watcher: detected close of hq-0sd
+2026/01/23 12:12:36 convoy watcher: detected close of hq-92o
+2026/01/23 12:12:36 convoy watcher: detected close of hq-92o
+2026/01/23 12:12:36 convoy watcher: detected close of hq-8tl
+2026/01/23 12:12:36 convoy watcher: detected close of hq-8tl
+2026/01/23 12:12:36 convoy watcher: detected close of hq-7m2
+2026/01/23 12:12:36 convoy watcher: detected close of hq-7m2
+2026/01/23 12:12:36 convoy watcher: detected close of hq-exu
+2026/01/23 12:12:36 convoy watcher: detected close of hq-exu
+2026/01/23 12:12:36 convoy watcher: detected close of hq-33z
+2026/01/23 12:12:36 convoy watcher: detected close of hq-33z
+2026/01/23 12:12:58 Heartbeat starting (recovery-focused)
+2026/01/23 12:12:58 Boot already running, skipping spawn
+2026/01/23 12:12:58 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 12:12:58 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:12:58 Witness for careops already running, skipping spawn
+2026/01/23 12:12:58 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:12:58 Witness for icecream already running, skipping spawn
+2026/01/23 12:12:58 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:12:58 Refinery for careops already running, skipping spawn
+2026/01/23 12:12:58 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:12:58 Refinery for icecream already running, skipping spawn
+2026/01/23 12:13:01 Heartbeat complete (#10)
+2026/01/23 12:16:01 Heartbeat starting (recovery-focused)
+2026/01/23 12:16:01 Boot already running, skipping spawn
+2026/01/23 12:16:01 Deacon heartbeat is stale (21h24m0s old), checking session...
+2026/01/23 12:16:01 Deacon stuck for 21h24m0s - restarting session
+2026/01/23 12:16:06 Deacon started successfully
+2026/01/23 12:16:06 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:16:06 Witness for careops already running, skipping spawn
+2026/01/23 12:16:06 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:16:06 Witness for icecream already running, skipping spawn
+2026/01/23 12:16:06 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:16:06 Refinery for careops already running, skipping spawn
+2026/01/23 12:16:06 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:16:06 Refinery for icecream already running, skipping spawn
+2026/01/23 12:18:07 Heartbeat complete (#11)
+2026/01/23 12:21:07 Heartbeat starting (recovery-focused)
+2026/01/23 12:21:07 Boot already running, skipping spawn
+2026/01/23 12:21:07 Deacon heartbeat is stale (21h29m0s old), checking session...
+2026/01/23 12:21:07 Deacon stuck for 21h29m0s - restarting session
+2026/01/23 12:21:12 Deacon started successfully
+2026/01/23 12:21:12 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:21:12 Witness for careops already running, skipping spawn
+2026/01/23 12:21:12 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:21:12 Witness for icecream already running, skipping spawn
+2026/01/23 12:21:12 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:21:12 Refinery for careops already running, skipping spawn
+2026/01/23 12:21:12 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:21:12 Refinery for icecream already running, skipping spawn
+2026/01/23 12:22:14 Heartbeat complete (#12)
+2026/01/23 12:25:14 Heartbeat starting (recovery-focused)
+2026/01/23 12:25:14 Boot already running, skipping spawn
+2026/01/23 12:25:14 Deacon started recently (4m1s ago), skipping heartbeat check
+2026/01/23 12:25:14 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:25:14 Witness for careops already running, skipping spawn
+2026/01/23 12:25:14 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:25:14 Witness for icecream already running, skipping spawn
+2026/01/23 12:25:14 Warning: no wisp config for careops - parked state may have been lost
+2026/01/23 12:25:14 Refinery for careops already running, skipping spawn
+2026/01/23 12:25:14 Warning: no wisp config for icecream - parked state may have been lost
+2026/01/23 12:25:14 Refinery for icecream already running, skipping spawn
+2026/01/23 12:25:51 Heartbeat complete (#13)
+2026/01/23 12:28:51 Heartbeat starting (recovery-focused)
+2026/01/23 12:28:51 Boot already running, skipping spawn
+2026/01/23 12:28:51 Deacon heartbeat is stale (21h37m0s old), checking session...
+2026/01/23 12:28:51 Deacon stuck for 21h37m0s - restarting session
+2026/01/23 12:28:57 Deacon started successfully
+2026/01/23 12:28:57 Witness for careops already running, skipping spawn
+2026/01/23 12:28:57 Witness for icecream already running, skipping spawn
+2026/01/23 12:28:57 Refinery for careops already running, skipping spawn
+2026/01/23 12:28:57 Refinery for icecream already running, skipping spawn
+2026/01/23 12:30:01 CRASH DETECTED: polecat icecream/rictus has hook_bead=ic-6fan but session gt-icecream-rictus is dead
+2026/01/23 12:30:15 Successfully restarted crashed polecat icecream/rictus
+2026/01/23 12:30:23 Heartbeat complete (#14)
+2026/01/23 12:33:23 Heartbeat starting (recovery-focused)
+2026/01/23 12:33:23 Boot already running, skipping spawn
+2026/01/23 12:33:23 Deacon started recently (4m26s ago), skipping heartbeat check
+2026/01/23 12:33:23 Witness for careops already running, skipping spawn
+2026/01/23 12:33:23 Witness for icecream already running, skipping spawn
+2026/01/23 12:33:23 Refinery for icecream already running, skipping spawn
+2026/01/23 12:33:23 Refinery for careops already running, skipping spawn
+2026/01/23 12:34:03 Heartbeat complete (#15)
+2026/01/23 12:37:03 Heartbeat starting (recovery-focused)
+2026/01/23 12:37:03 Boot already running, skipping spawn
+2026/01/23 12:37:03 Deacon heartbeat is stale (21h45m0s old), checking session...
+2026/01/23 12:37:03 Deacon stuck for 21h45m0s - restarting session
+2026/01/23 12:37:08 Deacon started successfully
+2026/01/23 12:37:08 Witness for careops already running, skipping spawn
+2026/01/23 12:37:08 Witness for icecream already running, skipping spawn
+2026/01/23 12:37:08 Refinery for careops already running, skipping spawn
+2026/01/23 12:37:08 Refinery for icecream already running, skipping spawn
+2026/01/23 12:37:51 Heartbeat complete (#16)
+2026/01/23 12:40:51 Heartbeat starting (recovery-focused)
+2026/01/23 12:40:51 Boot already running, skipping spawn
+2026/01/23 12:40:51 Deacon started recently (3m43s ago), skipping heartbeat check
+2026/01/23 12:40:51 Witness for icecream already running, skipping spawn
+2026/01/23 12:40:51 Witness for careops already running, skipping spawn
+2026/01/23 12:40:51 Refinery for careops already running, skipping spawn
+2026/01/23 12:40:51 Refinery for icecream already running, skipping spawn
+2026/01/23 12:41:34 Heartbeat complete (#17)
+2026/01/23 12:44:34 Heartbeat starting (recovery-focused)
+2026/01/23 12:44:34 Boot already running, skipping spawn
+2026/01/23 12:44:34 Deacon heartbeat is stale (21h53m0s old), checking session...
+2026/01/23 12:44:34 Deacon stuck for 21h53m0s - restarting session
+2026/01/23 12:44:39 Deacon started successfully
+2026/01/23 12:44:39 Witness for careops already running, skipping spawn
+2026/01/23 12:44:39 Witness for icecream already running, skipping spawn
+2026/01/23 12:44:39 Refinery for careops already running, skipping spawn
+2026/01/23 12:44:39 Refinery for icecream already running, skipping spawn
+2026/01/23 12:45:22 Heartbeat complete (#18)
+2026/01/23 12:48:22 Heartbeat starting (recovery-focused)
+2026/01/23 12:48:22 Boot already running, skipping spawn
+2026/01/23 12:48:22 Deacon started recently (3m43s ago), skipping heartbeat check
+2026/01/23 12:48:22 Witness for careops already running, skipping spawn
+2026/01/23 12:48:23 Witness for icecream already running, skipping spawn
+2026/01/23 12:48:23 Refinery for careops already running, skipping spawn
+2026/01/23 12:48:23 Refinery for icecream already running, skipping spawn
+2026/01/23 12:49:10 Heartbeat complete (#19)
+2026/01/23 12:52:10 Heartbeat starting (recovery-focused)
+2026/01/23 12:52:10 Boot already running, skipping spawn
+2026/01/23 12:52:10 Deacon heartbeat is stale (22h0m0s old), checking session...
+2026/01/23 12:52:10 Deacon stuck for 22h0m0s - restarting session
+2026/01/23 12:52:15 Deacon started successfully
+2026/01/23 12:52:15 Witness for careops already running, skipping spawn
+2026/01/23 12:52:15 Witness for icecream already running, skipping spawn
+2026/01/23 12:52:15 Refinery for careops already running, skipping spawn
+2026/01/23 12:52:15 Refinery for icecream already running, skipping spawn
+2026/01/23 12:53:04 Heartbeat complete (#20)
+2026/01/23 12:56:04 Heartbeat starting (recovery-focused)
+2026/01/23 12:56:04 Boot already running, skipping spawn
+2026/01/23 12:56:04 Deacon started recently (3m49s ago), skipping heartbeat check
+2026/01/23 12:56:04 Witness for careops already running, skipping spawn
+2026/01/23 12:56:04 Witness for icecream already running, skipping spawn
+2026/01/23 12:56:04 Refinery for careops already running, skipping spawn
+2026/01/23 12:56:04 Refinery for icecream already running, skipping spawn
+2026/01/23 12:57:07 Heartbeat complete (#21)
+2026/01/23 13:00:07 Heartbeat starting (recovery-focused)
+2026/01/23 13:00:07 Boot already running, skipping spawn
+2026/01/23 13:00:07 Deacon heartbeat is stale (22h8m0s old), checking session...
+2026/01/23 13:00:07 Deacon stuck for 22h8m0s - restarting session
+2026/01/23 13:00:12 Deacon started successfully
+2026/01/23 13:00:12 Witness for careops already running, skipping spawn
+2026/01/23 13:00:12 Witness for icecream already running, skipping spawn
+2026/01/23 13:00:12 Refinery for careops already running, skipping spawn
+2026/01/23 13:00:12 Refinery for icecream already running, skipping spawn
+2026/01/23 13:01:19 Heartbeat complete (#22)
+2026/01/23 13:04:19 Heartbeat starting (recovery-focused)
+2026/01/23 13:04:19 Boot already running, skipping spawn
+2026/01/23 13:04:19 Deacon started recently (4m6s ago), skipping heartbeat check
+2026/01/23 13:04:19 Witness for careops already running, skipping spawn
+2026/01/23 13:04:19 Witness for icecream already running, skipping spawn
+2026/01/23 13:04:19 Refinery for icecream already running, skipping spawn
+2026/01/23 13:04:19 Refinery for careops already running, skipping spawn
+2026/01/23 13:05:21 Heartbeat complete (#23)
+2026/01/23 13:08:21 Heartbeat starting (recovery-focused)
+2026/01/23 13:08:21 Boot already running, skipping spawn
+2026/01/23 13:08:21 Deacon heartbeat is stale (22h17m0s old), checking session...
+2026/01/23 13:08:21 Deacon stuck for 22h17m0s - restarting session
+2026/01/23 13:08:26 Deacon started successfully
+2026/01/23 13:08:26 Witness for careops already running, skipping spawn
+2026/01/23 13:08:26 Witness for icecream already running, skipping spawn
+2026/01/23 13:08:26 Refinery for careops already running, skipping spawn
+2026/01/23 13:08:26 Refinery for icecream already running, skipping spawn
+2026/01/23 13:09:18 Heartbeat complete (#24)
+2026/01/23 13:12:18 Heartbeat starting (recovery-focused)
+2026/01/23 13:12:19 Boot already running, skipping spawn
+2026/01/23 13:12:19 Deacon started recently (3m52s ago), skipping heartbeat check
+2026/01/23 13:12:19 Witness for careops already running, skipping spawn
+2026/01/23 13:12:19 Witness for icecream already running, skipping spawn
+2026/01/23 13:12:19 Refinery for careops already running, skipping spawn
+2026/01/23 13:12:19 Refinery for icecream already running, skipping spawn
+2026/01/23 13:13:27 Heartbeat complete (#25)
+2026/01/23 13:16:27 Heartbeat starting (recovery-focused)
+2026/01/23 13:16:27 Boot already running, skipping spawn
+2026/01/23 13:16:27 Deacon heartbeat is stale (22h25m0s old), checking session...
+2026/01/23 13:16:27 Deacon stuck for 22h25m0s - restarting session
+2026/01/23 13:16:32 Deacon started successfully
+2026/01/23 13:16:32 Witness for careops already running, skipping spawn
+2026/01/23 13:16:32 Witness for icecream already running, skipping spawn
+2026/01/23 13:16:32 Refinery for careops already running, skipping spawn
+2026/01/23 13:16:32 Refinery for icecream already running, skipping spawn
+2026/01/23 13:17:12 CRASH DETECTED: polecat icecream/toast has hook_bead=ic-7sql but session gt-icecream-toast is dead
+2026/01/23 13:17:12 Error: git fetch failed in /Users/jb/gt/icecream/polecats/toast/icecream: ssh: Could not resolve hostname github.com: nodename nor servname provided, or not known
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+2026/01/23 13:17:14 Successfully restarted crashed polecat icecream/toast
+2026/01/23 13:17:28 Heartbeat complete (#26)
+2026/01/23 13:20:28 Heartbeat starting (recovery-focused)
+2026/01/23 13:20:28 Boot already running, skipping spawn
+2026/01/23 13:20:28 Deacon started recently (3m56s ago), skipping heartbeat check
+2026/01/23 13:20:28 Witness for icecream already running, skipping spawn
+2026/01/23 13:20:28 Witness for careops already running, skipping spawn
+2026/01/23 13:20:28 Refinery for careops already running, skipping spawn
+2026/01/23 13:20:28 Refinery for icecream already running, skipping spawn
+2026/01/23 13:21:15 Heartbeat complete (#27)
+2026/01/23 13:24:15 Heartbeat starting (recovery-focused)
+2026/01/23 13:24:15 Boot already running, skipping spawn
+2026/01/23 13:24:15 Deacon heartbeat is stale (22h33m0s old), checking session...
+2026/01/23 13:24:15 Deacon stuck for 22h33m0s - restarting session
+2026/01/23 13:24:20 Deacon started successfully
+2026/01/23 13:24:20 Witness for careops already running, skipping spawn
+2026/01/23 13:24:20 Witness for icecream already running, skipping spawn
+2026/01/23 13:24:21 Refinery for careops already running, skipping spawn
+2026/01/23 13:24:21 Refinery for icecream already running, skipping spawn
+2026/01/23 13:25:11 Heartbeat complete (#28)
+2026/01/23 13:28:11 Heartbeat starting (recovery-focused)
+2026/01/23 13:28:11 Boot already running, skipping spawn
+2026/01/23 13:28:11 Deacon started recently (3m51s ago), skipping heartbeat check
+2026/01/23 13:28:11 Witness for careops already running, skipping spawn
+2026/01/23 13:28:11 Witness for icecream already running, skipping spawn
+2026/01/23 13:28:11 Refinery for careops already running, skipping spawn
+2026/01/23 13:28:11 Refinery for icecream already running, skipping spawn
+2026/01/23 13:28:56 Heartbeat complete (#29)
+2026/01/23 13:31:56 Heartbeat starting (recovery-focused)
+2026/01/23 13:31:56 Boot already running, skipping spawn
+2026/01/23 13:31:56 Deacon heartbeat is stale (22h40m0s old), checking session...
+2026/01/23 13:31:56 Deacon stuck for 22h40m0s - restarting session
+2026/01/23 13:32:01 Deacon started successfully
+2026/01/23 13:32:02 Witness for icecream already running, skipping spawn
+2026/01/23 13:32:02 Witness for careops already running, skipping spawn
+2026/01/23 13:32:02 Refinery for careops already running, skipping spawn
+2026/01/23 13:32:02 Refinery for icecream already running, skipping spawn
+2026/01/23 13:32:45 Heartbeat complete (#30)
+2026/01/23 13:35:45 Heartbeat starting (recovery-focused)
+2026/01/23 13:35:45 Boot already running, skipping spawn
+2026/01/23 13:35:45 Deacon started recently (3m44s ago), skipping heartbeat check
+2026/01/23 13:35:45 Witness for careops already running, skipping spawn
+2026/01/23 13:35:45 Witness for icecream already running, skipping spawn
+2026/01/23 13:35:45 Refinery for careops already running, skipping spawn
+2026/01/23 13:35:45 Refinery for icecream already running, skipping spawn
+2026/01/23 13:36:38 Heartbeat complete (#31)
+2026/01/23 13:39:38 Heartbeat starting (recovery-focused)
+2026/01/23 13:39:38 Boot already running, skipping spawn
+2026/01/23 13:39:38 Deacon heartbeat is stale (22h48m0s old), checking session...
+2026/01/23 13:39:38 Deacon stuck for 22h48m0s - restarting session
+2026/01/23 13:39:43 Deacon started successfully
+2026/01/23 13:39:43 Witness for careops already running, skipping spawn
+2026/01/23 13:39:43 Witness for icecream already running, skipping spawn
+2026/01/23 13:39:43 Refinery for icecream already running, skipping spawn
+2026/01/23 13:39:43 Refinery for careops already running, skipping spawn
+2026/01/23 13:40:25 Heartbeat complete (#32)
+2026/01/23 13:43:25 Heartbeat starting (recovery-focused)
+2026/01/23 13:43:26 Boot already running, skipping spawn
+2026/01/23 13:43:26 Deacon started recently (3m42s ago), skipping heartbeat check
+2026/01/23 13:43:26 Witness for careops already running, skipping spawn
+2026/01/23 13:43:26 Witness for icecream already running, skipping spawn
+2026/01/23 13:43:26 Refinery for careops already running, skipping spawn
+2026/01/23 13:43:26 Refinery for icecream already running, skipping spawn
+2026/01/23 13:44:22 Heartbeat complete (#33)
+2026/01/23 13:47:22 Heartbeat starting (recovery-focused)
+2026/01/23 13:47:22 Boot already running, skipping spawn
+2026/01/23 13:47:22 Deacon heartbeat is stale (22h56m0s old), checking session...
+2026/01/23 13:47:22 Deacon stuck for 22h56m0s - restarting session
+2026/01/23 13:47:27 Deacon started successfully
+2026/01/23 13:47:27 Witness for careops already running, skipping spawn
+2026/01/23 13:47:27 Witness for icecream already running, skipping spawn
+2026/01/23 13:47:27 Refinery for careops already running, skipping spawn
+2026/01/23 13:47:27 Refinery for icecream already running, skipping spawn
+2026/01/23 13:48:27 Heartbeat complete (#34)
+2026/01/23 13:51:27 Heartbeat starting (recovery-focused)
+2026/01/23 13:51:27 Boot already running, skipping spawn
+2026/01/23 13:51:27 Deacon started recently (3m59s ago), skipping heartbeat check
+2026/01/23 13:51:27 Witness for icecream already running, skipping spawn
+2026/01/23 13:51:27 Witness for careops already running, skipping spawn
+2026/01/23 13:51:27 Refinery for careops already running, skipping spawn
+2026/01/23 13:51:27 Refinery for icecream already running, skipping spawn
+2026/01/23 13:52:10 Heartbeat complete (#35)
+2026/01/23 13:55:10 Heartbeat starting (recovery-focused)
+2026/01/23 13:55:10 Boot already running, skipping spawn
+2026/01/23 13:55:10 Deacon heartbeat is stale (23h3m0s old), checking session...
+2026/01/23 13:55:10 Deacon stuck for 23h3m0s - restarting session
+2026/01/23 13:55:15 Deacon started successfully
+2026/01/23 13:55:15 Witness for careops already running, skipping spawn
+2026/01/23 13:55:15 Witness for icecream already running, skipping spawn
+2026/01/23 13:55:15 Refinery for careops already running, skipping spawn
+2026/01/23 13:55:15 Refinery for icecream already running, skipping spawn
+2026/01/23 13:55:57 Heartbeat complete (#36)
+2026/01/23 13:58:57 Heartbeat starting (recovery-focused)
+2026/01/23 13:58:57 Boot already running, skipping spawn
+2026/01/23 13:58:57 Deacon started recently (3m41s ago), skipping heartbeat check
+2026/01/23 13:58:57 Witness for careops already running, skipping spawn
+2026/01/23 13:58:57 Witness for icecream already running, skipping spawn
+2026/01/23 13:58:57 Refinery for careops already running, skipping spawn
+2026/01/23 13:58:57 Refinery for icecream already running, skipping spawn
+2026/01/23 13:59:36 Heartbeat complete (#37)
+2026/01/23 14:02:36 Heartbeat starting (recovery-focused)
+2026/01/23 14:02:36 Boot already running, skipping spawn
+2026/01/23 14:02:36 Deacon heartbeat is stale (23h11m0s old), checking session...
+2026/01/23 14:02:36 Deacon stuck for 23h11m0s - restarting session
+2026/01/23 14:02:41 Deacon started successfully
+2026/01/23 14:02:41 Witness for careops already running, skipping spawn
+2026/01/23 14:02:41 Witness for icecream already running, skipping spawn
+2026/01/23 14:02:41 Refinery for careops already running, skipping spawn
+2026/01/23 14:02:41 Refinery for icecream already running, skipping spawn
+2026/01/23 14:03:45 Heartbeat complete (#38)
+2026/01/23 14:06:45 Heartbeat starting (recovery-focused)
+2026/01/23 14:06:45 Boot already running, skipping spawn
+2026/01/23 14:06:45 Deacon started recently (4m5s ago), skipping heartbeat check
+2026/01/23 14:06:45 Witness for careops already running, skipping spawn
+2026/01/23 14:06:45 Witness for icecream already running, skipping spawn
+2026/01/23 14:06:45 Refinery for careops already running, skipping spawn
+2026/01/23 14:06:45 Refinery for icecream already running, skipping spawn
+2026/01/23 14:06:53 Heartbeat complete (#39)
+2026/01/23 14:09:53 Heartbeat starting (recovery-focused)
+2026/01/23 14:09:53 Boot already running, skipping spawn
+2026/01/23 14:09:53 Deacon heartbeat is stale (23h18m0s old), checking session...
+2026/01/23 14:09:53 Deacon stuck for 23h18m0s - restarting session
+2026/01/23 14:09:59 Deacon started successfully
+2026/01/23 14:09:59 Witness for careops already running, skipping spawn
+2026/01/23 14:09:59 Witness for icecream already running, skipping spawn
+2026/01/23 14:09:59 Refinery for careops already running, skipping spawn
+2026/01/23 14:09:59 Refinery for icecream already running, skipping spawn
+2026/01/23 14:10:05 Heartbeat complete (#40)
+2026/01/23 14:13:05 Heartbeat starting (recovery-focused)
+2026/01/23 14:13:05 Boot already running, skipping spawn
+2026/01/23 14:13:05 Deacon started recently (3m7s ago), skipping heartbeat check
+2026/01/23 14:13:05 Witness for careops already running, skipping spawn
+2026/01/23 14:13:05 Witness for icecream already running, skipping spawn
+2026/01/23 14:13:05 Refinery for careops already running, skipping spawn
+2026/01/23 14:13:05 Refinery for icecream already running, skipping spawn
+2026/01/23 14:13:11 Heartbeat complete (#41)
+2026/01/23 14:16:11 Heartbeat starting (recovery-focused)
+2026/01/23 14:16:11 Boot already running, skipping spawn
+2026/01/23 14:16:11 Deacon heartbeat is stale (23h24m0s old), checking session...
+2026/01/23 14:16:11 Deacon stuck for 23h24m0s - restarting session
+2026/01/23 14:16:17 Deacon started successfully
+2026/01/23 14:16:17 Witness for icecream already running, skipping spawn
+2026/01/23 14:16:17 Witness for careops already running, skipping spawn
+2026/01/23 14:16:17 Refinery for careops already running, skipping spawn
+2026/01/23 14:16:17 Refinery for icecream already running, skipping spawn
+2026/01/23 14:16:25 Heartbeat complete (#42)
+2026/01/23 14:19:25 Heartbeat starting (recovery-focused)
+2026/01/23 14:19:25 Boot already running, skipping spawn
+2026/01/23 14:19:25 Deacon started recently (3m8s ago), skipping heartbeat check
+2026/01/23 14:19:25 Witness for icecream already running, skipping spawn
+2026/01/23 14:19:25 Witness for careops already running, skipping spawn
+2026/01/23 14:19:25 Refinery for careops already running, skipping spawn
+2026/01/23 14:19:25 Refinery for icecream already running, skipping spawn
+2026/01/23 14:19:30 Heartbeat complete (#43)
+2026/01/23 14:22:30 Heartbeat starting (recovery-focused)
+2026/01/23 14:22:30 Boot already running, skipping spawn
+2026/01/23 14:22:30 Deacon heartbeat is stale (23h31m0s old), checking session...
+2026/01/23 14:22:30 Deacon stuck for 23h31m0s - restarting session
+2026/01/23 14:22:36 Deacon started successfully
+2026/01/23 14:22:36 Witness for careops already running, skipping spawn
+2026/01/23 14:22:36 Witness for icecream already running, skipping spawn
+2026/01/23 14:22:36 Refinery for careops already running, skipping spawn
+2026/01/23 14:22:36 Refinery for icecream already running, skipping spawn
+2026/01/23 14:22:39 Heartbeat complete (#44)
+2026/01/23 14:25:39 Heartbeat starting (recovery-focused)
+2026/01/23 14:25:39 Boot already running, skipping spawn
+2026/01/23 14:25:39 Deacon started recently (3m3s ago), skipping heartbeat check
+2026/01/23 14:25:39 Witness for careops already running, skipping spawn
+2026/01/23 14:25:39 Witness for icecream already running, skipping spawn
+2026/01/23 14:25:39 Refinery for icecream already running, skipping spawn
+2026/01/23 14:25:39 Refinery for careops already running, skipping spawn
+2026/01/23 14:25:42 Heartbeat complete (#45)
+2026/01/23 14:28:42 Heartbeat starting (recovery-focused)
+2026/01/23 14:28:42 Boot already running, skipping spawn
+2026/01/23 14:28:42 Deacon heartbeat is stale (23h37m0s old), checking session...
+2026/01/23 14:28:42 Deacon stuck for 23h37m0s - restarting session
+2026/01/23 14:28:47 Deacon started successfully
+2026/01/23 14:28:47 Witness for careops already running, skipping spawn
+2026/01/23 14:28:47 Witness for icecream already running, skipping spawn
+2026/01/23 14:28:47 Refinery for careops already running, skipping spawn
+2026/01/23 14:28:47 Refinery for icecream already running, skipping spawn
+2026/01/23 14:28:49 Heartbeat complete (#46)
+2026/01/23 14:31:49 Heartbeat starting (recovery-focused)
+2026/01/23 14:31:49 Boot already running, skipping spawn
+2026/01/23 14:31:49 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 14:31:49 Witness for careops already running, skipping spawn
+2026/01/23 14:31:49 Witness for icecream already running, skipping spawn
+2026/01/23 14:31:49 Refinery for careops already running, skipping spawn
+2026/01/23 14:31:49 Refinery for icecream already running, skipping spawn
+2026/01/23 14:31:52 Heartbeat complete (#47)
+2026/01/23 14:34:52 Heartbeat starting (recovery-focused)
+2026/01/23 14:34:52 Boot already running, skipping spawn
+2026/01/23 14:34:52 Deacon heartbeat is stale (23h43m0s old), checking session...
+2026/01/23 14:34:52 Deacon stuck for 23h43m0s - restarting session
+2026/01/23 14:34:57 Deacon started successfully
+2026/01/23 14:34:57 Witness for careops already running, skipping spawn
+2026/01/23 14:34:57 Witness for icecream already running, skipping spawn
+2026/01/23 14:34:57 Refinery for careops already running, skipping spawn
+2026/01/23 14:34:57 Refinery for icecream already running, skipping spawn
+2026/01/23 14:34:59 Heartbeat complete (#48)
+2026/01/23 14:37:59 Heartbeat starting (recovery-focused)
+2026/01/23 14:37:59 Boot already running, skipping spawn
+2026/01/23 14:37:59 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 14:37:59 Witness for careops already running, skipping spawn
+2026/01/23 14:37:59 Witness for icecream already running, skipping spawn
+2026/01/23 14:37:59 Refinery for careops already running, skipping spawn
+2026/01/23 14:37:59 Refinery for icecream already running, skipping spawn
+2026/01/23 14:38:01 Heartbeat complete (#49)
+2026/01/23 14:40:39 convoy watcher: bd activity error: signal: killed, restarting in 5s
+2026/01/23 14:41:01 Heartbeat starting (recovery-focused)
+2026/01/23 14:41:01 Boot already running, skipping spawn
+2026/01/23 14:41:01 Deacon heartbeat is stale (23h49m0s old), checking session...
+2026/01/23 14:41:01 Deacon stuck for 23h49m0s - restarting session
+2026/01/23 14:41:06 Deacon started successfully
+2026/01/23 14:41:06 Witness for careops already running, skipping spawn
+2026/01/23 14:41:06 Witness for icecream already running, skipping spawn
+2026/01/23 14:41:06 Refinery for icecream already running, skipping spawn
+2026/01/23 14:41:06 Refinery for careops already running, skipping spawn
+2026/01/23 14:41:09 Heartbeat complete (#50)
+2026/01/23 14:44:09 Heartbeat starting (recovery-focused)
+2026/01/23 14:44:09 Boot already running, skipping spawn
+2026/01/23 14:44:09 Deacon started recently (3m3s ago), skipping heartbeat check
+2026/01/23 14:44:09 Witness for careops already running, skipping spawn
+2026/01/23 14:44:09 Witness for icecream already running, skipping spawn
+2026/01/23 14:44:09 Refinery for careops already running, skipping spawn
+2026/01/23 14:44:09 Refinery for icecream already running, skipping spawn
+2026/01/23 14:44:11 Heartbeat complete (#51)
+2026/01/23 14:47:11 Heartbeat starting (recovery-focused)
+2026/01/23 14:47:11 Boot already running, skipping spawn
+2026/01/23 14:47:11 Deacon heartbeat is stale (23h55m0s old), checking session...
+2026/01/23 14:47:11 Deacon stuck for 23h55m0s - restarting session
+2026/01/23 14:47:16 Deacon started successfully
+2026/01/23 14:47:16 Witness for careops already running, skipping spawn
+2026/01/23 14:47:16 Witness for icecream already running, skipping spawn
+2026/01/23 14:47:16 Refinery for careops already running, skipping spawn
+2026/01/23 14:47:16 Refinery for icecream already running, skipping spawn
+2026/01/23 14:47:18 Heartbeat complete (#52)
+2026/01/23 14:50:18 Heartbeat starting (recovery-focused)
+2026/01/23 14:50:18 Boot already running, skipping spawn
+2026/01/23 14:50:18 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 14:50:18 Witness for careops already running, skipping spawn
+2026/01/23 14:50:18 Witness for icecream already running, skipping spawn
+2026/01/23 14:50:18 Refinery for careops already running, skipping spawn
+2026/01/23 14:50:18 Refinery for icecream already running, skipping spawn
+2026/01/23 14:50:20 Heartbeat complete (#53)
+2026/01/23 14:53:20 Heartbeat starting (recovery-focused)
+2026/01/23 14:53:20 Boot already running, skipping spawn
+2026/01/23 14:53:20 Deacon heartbeat is stale (24h2m0s old), checking session...
+2026/01/23 14:53:20 Deacon stuck for 24h2m0s - restarting session
+2026/01/23 14:53:25 Deacon started successfully
+2026/01/23 14:53:25 Witness for careops already running, skipping spawn
+2026/01/23 14:53:25 Witness for icecream already running, skipping spawn
+2026/01/23 14:53:25 Refinery for careops already running, skipping spawn
+2026/01/23 14:53:25 Refinery for icecream already running, skipping spawn
+2026/01/23 14:53:27 Heartbeat complete (#54)
+2026/01/23 14:56:27 Heartbeat starting (recovery-focused)
+2026/01/23 14:56:27 Boot already running, skipping spawn
+2026/01/23 14:56:27 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 14:56:27 Witness for careops already running, skipping spawn
+2026/01/23 14:56:27 Witness for icecream already running, skipping spawn
+2026/01/23 14:56:27 Refinery for careops already running, skipping spawn
+2026/01/23 14:56:27 Refinery for icecream already running, skipping spawn
+2026/01/23 14:56:29 Heartbeat complete (#55)
+2026/01/23 15:22:04 Heartbeat starting (recovery-focused)
+2026/01/23 15:22:04 Boot already running, skipping spawn
+2026/01/23 15:22:04 Deacon heartbeat is stale (24h30m0s old), checking session...
+2026/01/23 15:22:04 Deacon stuck for 24h30m0s - restarting session
+2026/01/23 15:22:09 Deacon started successfully
+2026/01/23 15:22:09 Witness for careops already running, skipping spawn
+2026/01/23 15:22:09 Witness for icecream already running, skipping spawn
+2026/01/23 15:22:09 Refinery for careops already running, skipping spawn
+2026/01/23 15:22:09 Refinery for icecream already running, skipping spawn
+2026/01/23 15:22:11 Heartbeat complete (#56)
+2026/01/23 15:25:11 Heartbeat starting (recovery-focused)
+2026/01/23 15:25:11 Boot already running, skipping spawn
+2026/01/23 15:25:11 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 15:25:11 Witness for careops already running, skipping spawn
+2026/01/23 15:25:11 Witness for icecream already running, skipping spawn
+2026/01/23 15:25:11 Refinery for careops already running, skipping spawn
+2026/01/23 15:25:11 Refinery for icecream already running, skipping spawn
+2026/01/23 15:25:13 Heartbeat complete (#57)
+2026/01/23 16:32:41 Heartbeat starting (recovery-focused)
+2026/01/23 16:32:41 Boot already running, skipping spawn
+2026/01/23 16:32:41 Deacon heartbeat is stale (25h41m0s old), checking session...
+2026/01/23 16:32:41 Deacon stuck for 25h41m0s - restarting session
+2026/01/23 16:32:46 Deacon started successfully
+2026/01/23 16:32:46 Witness for careops already running, skipping spawn
+2026/01/23 16:32:46 Witness for icecream already running, skipping spawn
+2026/01/23 16:32:46 Refinery for careops already running, skipping spawn
+2026/01/23 16:32:46 Refinery for icecream already running, skipping spawn
+2026/01/23 16:32:48 Heartbeat complete (#58)
+2026/01/23 16:35:48 Heartbeat starting (recovery-focused)
+2026/01/23 16:35:48 Boot already running, skipping spawn
+2026/01/23 16:35:48 Deacon started recently (3m2s ago), skipping heartbeat check
+2026/01/23 16:35:48 Witness for careops already running, skipping spawn
+2026/01/23 16:35:48 Witness for icecream already running, skipping spawn
+2026/01/23 16:35:48 Refinery for careops already running, skipping spawn
+2026/01/23 16:35:48 Refinery for icecream already running, skipping spawn
+2026/01/23 16:35:50 Heartbeat complete (#59)
+2026/01/23 16:38:50 Heartbeat starting (recovery-focused)
+2026/01/23 16:38:50 Boot already running, skipping spawn
+2026/01/23 16:38:50 Deacon heartbeat is stale (25h47m0s old), checking session...
+2026/01/23 16:38:50 Deacon stuck for 25h47m0s - restarting session
+2026/01/23 16:38:55 Deacon started successfully
+2026/01/23 16:38:55 Witness for careops already running, skipping spawn
+2026/01/23 16:38:55 Witness for icecream already running, skipping spawn
+2026/01/23 16:38:55 Refinery for careops already running, skipping spawn
+2026/01/23 16:38:55 Refinery for icecream already running, skipping spawn
+2026/01/23 16:42:30 Heartbeat complete (#60)
+2026/01/23 17:43:40 Heartbeat starting (recovery-focused)
+2026/01/23 17:43:40 Boot already running, skipping spawn
+2026/01/23 17:43:40 Deacon heartbeat is stale (26h52m0s old), checking session...
+2026/01/23 17:43:40 Deacon stuck for 26h52m0s - restarting session
+2026/01/23 17:59:02 Deacon started successfully
+2026/01/23 17:59:02 Witness for careops already running, skipping spawn
+2026/01/23 17:59:02 Witness for icecream already running, skipping spawn
+2026/01/23 17:59:02 Refinery for careops already running, skipping spawn
+2026/01/23 17:59:02 Refinery for icecream already running, skipping spawn
+2026/01/23 18:32:24 Heartbeat complete (#61)
+2026/01/23 19:22:54 Heartbeat starting (recovery-focused)
+2026/01/23 19:22:54 Boot already running, skipping spawn
+2026/01/23 19:22:54 Deacon started recently (3m35s ago), skipping heartbeat check
+2026/01/23 19:22:54 Witness for careops already running, skipping spawn
+2026/01/23 19:22:54 Witness for icecream already running, skipping spawn
+2026/01/23 19:22:54 Refinery for careops already running, skipping spawn
+2026/01/23 19:22:54 Refinery for icecream already running, skipping spawn
+2026/01/23 19:23:27 Heartbeat complete (#62)
+2026/01/23 19:26:27 Heartbeat starting (recovery-focused)
+2026/01/23 19:26:27 Boot already running, skipping spawn
+2026/01/23 19:26:27 Deacon heartbeat is stale (28h35m0s old), checking session...
+2026/01/23 19:26:27 Deacon stuck for 28h35m0s - restarting session
+2026/01/23 19:26:32 Deacon started successfully
+2026/01/23 19:26:32 Witness for careops already running, skipping spawn
+2026/01/23 19:26:32 Witness for icecream already running, skipping spawn
+2026/01/23 19:26:32 Refinery for icecream already running, skipping spawn
+2026/01/23 19:26:32 Refinery for careops already running, skipping spawn
+2026/01/23 19:27:15 Heartbeat complete (#63)
+2026/01/23 19:30:15 Heartbeat starting (recovery-focused)
+2026/01/23 19:30:15 Boot already running, skipping spawn
+2026/01/23 19:30:15 Deacon started recently (3m44s ago), skipping heartbeat check
+2026/01/23 19:30:15 Witness for careops already running, skipping spawn
+2026/01/23 19:30:15 Witness for icecream already running, skipping spawn
+2026/01/23 19:30:15 Refinery for careops already running, skipping spawn
+2026/01/23 19:30:15 Refinery for icecream already running, skipping spawn
+2026/01/23 19:30:48 Heartbeat complete (#64)
+2026/01/23 19:33:48 Heartbeat starting (recovery-focused)
+2026/01/23 19:33:48 Boot already running, skipping spawn
+2026/01/23 19:33:48 Deacon heartbeat is stale (28h42m0s old), checking session...
+2026/01/23 19:33:48 Deacon stuck for 28h42m0s - restarting session
+2026/01/23 19:33:54 Deacon started successfully
+2026/01/23 19:33:54 Witness for icecream already running, skipping spawn
+2026/01/23 19:33:54 Witness for careops already running, skipping spawn
+2026/01/23 19:33:54 Refinery for careops already running, skipping spawn
+2026/01/23 19:33:54 Refinery for icecream already running, skipping spawn
+2026/01/23 19:34:38 Heartbeat complete (#65)
+2026/01/23 19:37:38 Heartbeat starting (recovery-focused)
+2026/01/23 19:37:38 Boot already running, skipping spawn
+2026/01/23 19:37:38 Deacon started recently (3m45s ago), skipping heartbeat check
+2026/01/23 19:37:38 Witness for careops already running, skipping spawn
+2026/01/23 19:37:38 Witness for icecream already running, skipping spawn
+2026/01/23 19:37:38 Refinery for careops already running, skipping spawn
+2026/01/23 19:37:38 Refinery for icecream already running, skipping spawn
+2026/01/23 19:38:11 Heartbeat complete (#66)
+2026/01/23 19:41:11 Heartbeat starting (recovery-focused)
+2026/01/23 19:41:11 Boot already running, skipping spawn
+2026/01/23 19:41:11 Deacon heartbeat is stale (28h49m0s old), checking session...
+2026/01/23 19:41:11 Deacon stuck for 28h49m0s - restarting session
+2026/01/23 19:41:16 Deacon started successfully
+2026/01/23 19:41:16 Witness for careops already running, skipping spawn
+2026/01/23 19:41:16 Witness for icecream already running, skipping spawn
+2026/01/23 19:41:16 Refinery for careops already running, skipping spawn
+2026/01/23 19:41:17 Refinery for icecream already running, skipping spawn
+2026/01/23 19:42:02 Heartbeat complete (#67)
+2026/01/23 19:42:35 Received signal terminated, shutting down
+2026/01/23 19:42:35 Daemon shutting down
+2026/01/23 19:42:35 Feed curator stopped
+2026/01/23 19:42:35 convoy watcher: bd activity error: signal: killed, restarting in 5s
+2026/01/23 19:42:35 Convoy watcher stopped
+2026/01/23 19:42:35 Daemon stopped

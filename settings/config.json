@@ -1,0 +1,39 @@
+{
+  "type": "town-settings",
+  "version": 1,
+  "default_agent": "cursor",
+  "agents": {
+    "cursor": {
+      "command": "cursor-agent",
+      "args": [
+        "--model",
+        "auto",
+        "-f"
+      ]
+    },
+    "cursor-composer": {
+      "command": "cursor-agent",
+      "args": [
+        "--model",
+        "composer-1",
+        "-f"
+      ]
+    },
+    "cursor-opus": {
+      "command": "cursor-agent",
+      "args": [
+        "--model",
+        "opus-4.5",
+        "-f"
+      ]
+    },
+    "cursor-sonnet": {
+      "command": "cursor-agent",
+      "args": [
+        "--model",
+        "sonnet-4.5",
+        "-f"
+      ]
+    }
+  }
+}

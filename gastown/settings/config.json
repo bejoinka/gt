@@ -1,0 +1,21 @@
+{
+  "type": "rig-settings",
+  "version": 1,
+  "merge_queue": {
+    "enabled": true,
+    "target_branch": "main",
+    "integration_branches": true,
+    "on_conflict": "assign_back",
+    "run_tests": true,
+    "test_command": "go test ./...",
+    "delete_merged_branches": true,
+    "retry_flaky_tests": 1,
+    "poll_interval": "30s",
+    "max_concurrent": 1
+  },
+  "namepool": {
+    "style": "mad-max",
+    "max_before_numbering": 50
+  },
+  "agent": "cursor-composer"
+}

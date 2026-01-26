@@ -1,0 +1,9 @@
+{
+  "rig": "careops",
+  "values": {
+    "cursor": "cursor-agent --model auto -f",
+    "default-agent": "cursor",
+    "max_polecats": 5
+  },
+  "blocked": []
+}

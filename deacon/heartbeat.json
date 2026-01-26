@@ -1,7 +1,1 @@
-{
-  "timestamp": "2026-01-22T19:51:44.51704Z",
-  "cycle": 2,
-  "last_action": "exiting after 3 cycles - crew activity",
-  "healthy_agents": 0,
-  "unhealthy_agents": 0
-}
+{"last_patrol": "2026-01-26T14:31:39Z", "patrol_count": 2, "extraordinary_action": false}
