@@ -1,472 +1,773 @@
 # Ice Cream Know Your Rights — Implementation Plan
 
-## Executive Summary
-
-This document breaks down the implementation of the Ice Cream Know Your Rights game into phases with clear dependencies for parallel development.
-
-**Status**: The game is ~60% implemented. Core infrastructure is solid; main gaps are resistance actions, shop UI completion, and social feed integration.
+> **Working directory**: `~/dev/icecream`
+>
+> **Design principle**: Simple objects, complex interactions.
 
 ---
 
-## 1. Confirmed Tech Stack
+## 1. Data Model (Simplified)
 
-| Component | Technology | Version | Status |
-|-----------|-----------|---------|--------|
-| Frontend | Next.js | 16.1.2 | ✅ Implemented |
-| UI | React | 19.2.3 | ✅ Implemented |
-| Language | TypeScript | 5 | ✅ Implemented |
-| Styling | Tailwind CSS | 4 | ✅ Implemented |
-| State | Zustand | 5.0.10 | ✅ Implemented |
-| Data Fetching | TanStack Query | 5.90.19 | ✅ Implemented |
-| Backend | Supabase | 2.90.1 | ✅ Implemented |
-| Cache/Queue | Redis (ioredis) | 5.9.1 | ✅ Implemented |
-| Testing | Vitest + Playwright | 4 / 1.57 | ✅ Implemented |
-| Analytics | PostHog | 1.328.0 | ✅ Implemented |
+### Principle
 
-**No additional stack components needed.**
+**Objects are simple. Complexity comes from their interactions.**
 
 ---
 
-## 2. Existing Codebase Inventory
+### CMS Content (Templates, Not Per-Player)
 
-**Location**: `polecats/nux/icecream/`
+These are shared templates for all players:
 
-### Already Implemented
+```sql
+-- Customer ARCHETYPES (not individual customers)
+customer_archetypes (
+  id, name, archetype_type, base_willingness_to_sign, dialogue_templates
+)
 
-- ✅ **Core type system** (`src/types/core.ts`) - 900+ lines of comprehensive types
-- ✅ **CMS database schema** (migrations 001-006)
-  - flavors, workers, customers, encounters, petitions tables
-  - test_definitions, game_states, test_runs, agent_encounters
-  - events, event_types, event_instances, event_comments
-- ✅ **Game engine library** (`src/lib/game-engine/`)
-- ✅ **Encounter generator** (`src/lib/encounter-generator/`)
-- ✅ **Customer generator** (`src/lib/customer-generator/`)
-- ✅ **Agent adapter system** (`src/lib/agent-adapter.ts`)
-- ✅ **Supabase integration** (`src/lib/supabase*.ts`)
-- ✅ **Redis integration** (`src/lib/redis.ts`)
-- ✅ **Session management** (`src/lib/session.ts`)
-- ✅ **UI components** (shop, menu, overlays, game, start screens)
-- ✅ **Admin panel** (`/admin` routes)
-- ✅ **Testing infrastructure** (Playwright E2E tests)
+-- Flavors (shop flavors you can buy)
+flavors (
+  id, name, display_name, color, star_cost
+)
 
-### Main Gaps Identified
+-- Resistance actions (WCU items)
+resistance_actions (
+  id, name, description, snowflake_cost, effect_type, effect_magnitude
+)
 
-1. **Resistance actions** - marked TODO in game-design.md
-2. **Shop screen UX** - marked TODO in game-design.md
-3. **Edicts view UX** - marked TODO in game-design.md
-4. **Social feed integration** - marked TODO in game-design.md
-5. **Game Over / Victory screens** - marked TODO in game-design.md
+-- Edict types (proclamation templates)
+edict_types (
+  id, name, description, melt_o_meter_cost, target_type
+)
+```
+
+### Per-Player Game State (Stored Separately)
+
+```typescript
+// The complete game state for one player
+interface GameState {
+  // Resources
+  stars: number;
+  snowflakes: number;
+  meltOMeter: number; // 0-5
+  socialInfluence: number; // 0-100
+
+  // Inventory (with quantities)
+  toppings: Record<ToppingId, number>;  // { sprinkles: 3, cherry: 1 }
+  resistanceActions: Record<ActionId, number>; // { camera: 2, sunglasses: 1 }
+
+  // Flavors (instances with mutable state)
+  // These are workers you've hired - they accumulate stars, snowflakes, etc.
+  flavors: Record<FlavorId, FlavorInstance>;
+
+  // Active edicts affecting this player
+  activeEdicts: ActiveEdict[];
+
+  // Current queue (customer instances, not archetype references)
+  queue: QueueEntity[];
+
+  // Progress
+  day: number;
+  phase: GamePhase;
+  billOfRightsProgress: BillOfRightsState;
+
+  // First-time events flags
+  seenFirstAgent: boolean;
+  seenFirstWorkerTaken: boolean;
+  // etc.
+}
+
+// A flavor instance (worker you've hired)
+interface FlavorInstance {
+  id: FlavorId;
+  name: string;
+  displayName: string;
+  color: string;
+  assetId: string;  // References /assets/flavors/{id}.png
+
+  // Mutable state (accumulates over time)
+  stars: number;        // Total stars earned from serves
+  snowflakes: number;   // Accumulated when served to customers with snowflakes
+  present: boolean;     // Is currently working (not taken/hiding)?
+}
+
+// A customer instance (created when entering queue)
+interface CustomerInstance {
+  id: string;
+  archetypeId: string;  // Reference to archetype template
+  name: string;
+  assetId: string;  // References /assets/customers/{archetype}-{variant}.png
+
+  // Mutable state
+  stars: number;        // Loyalty (0-5), increases with each serve
+  snowflakes: number;   // Earned by signing petitions
+  favoriteFlavor: FlavorId;  // Rolled on entry
+
+  // Derived state
+  favoriteUnlocked: boolean;  // true when stars >= 3
+}
+
+// An entity in the daily queue
+type QueueEntity =
+  | CustomerInstance |  // Full customer instance
+  | AgentEntity;       // Agent with edict
+
+interface AgentEntity {
+  type: 'agent';
+  edictType: string;
+  target: string;  // flavorId, toppingId, or 'player'
+}
+```
+
+**Key points**:
+- **Flavors are instances** - they accumulate stars/snowflakes from being served
+- **Customers are instances** - created from archetype templates, with rolled favorite flavors
+- Both have mutable state that changes during gameplay
 
 ---
 
-## 3. Phased Implementation Plan
+### Why This Separation?
 
-### Phase 0: Foundation Cleanup
+| What | Where | Why |
+|------|-------|-----|
+| Flavor definitions | CMS (Supabase) | Shared content, editable |
+| Customer archetypes | CMS (Supabase) | Shared templates |
+| Game state | Client (Zustand) + optionally persisted | Per-player, fast, private |
+| Saved games | Supabase `saved_games` table | For multiplayer/continuation |
 
-**Status**: Mostly complete, needs consolidation
+---
+
+## 2. Simplified Supabase Schema
+
+### CMS Tables (Content Templates)
+
+```sql
+-- Customer ARCHETYPES (templates, not instances)
+CREATE TABLE customer_archetypes (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  base_willingness_to_sign INTEGER DEFAULT 50,
+  dialogue JSONB DEFAULT '{}',
+  -- Reference to asset file (see Assets section below)
+  asset_id TEXT NOT NULL  -- e.g., 'customer-regular-1'
+);
+
+-- Flavors available for purchase
+CREATE TABLE flavors (
+  id TEXT PRIMARY KEY,
+  name TEXT UNIQUE NOT NULL,
+  display_name TEXT NOT NULL,
+  color TEXT NOT NULL,
+  star_cost INTEGER NOT NULL,
+  asset_id TEXT NOT NULL  -- e.g., 'flavor-vanilla'
+);
+
+-- Resistance actions
+CREATE TABLE resistance_actions (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  snowflake_cost INTEGER NOT NULL,
+  effect_type TEXT NOT NULL,
+  effect_magnitude JSONB DEFAULT '{}',
+  asset_id TEXT  -- Optional: icon for the action
+);
+
+-- Edict types
+CREATE TABLE edict_types (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  target_type TEXT NOT NULL,
+  melt_o_meter_cost INTEGER DEFAULT 1
+);
+```
+
+### Asset Storage
+
+**Store PNGs as static assets in the project**, not in Supabase:
+
+```
+public/assets/
+  flavors/
+    vanilla.png
+    chocolate.png
+    strawberry.png
+    butter-pecan.png
+    pistachio.png
+    cotton-candy.png
+
+  customers/
+    regular-1.png
+    regular-2.png
+    curious-1.png
+    curious-2.png
+    skeptical-1.png
+    skeptical-2.png
+    supportive-1.png
+    fearful-1.png
+    opportunist-1.png
+    ally-1.png
+    informant-1.png
+
+  agents/
+    ice-cream-agent.png
+
+  actions/
+    camera.png
+    sunglasses.png
+    legal-pad.png
+    whistle.png
+    ice-shield.png
+    recording-device.png
+    dessert-wand.png
+    whipped-cream-cloud.png
+    fake-edict.png
+    cone-of-shame.png
+
+  ui/
+    star.png
+    snowflake.png
+    melt-o-meter-icon.png
+```
+
+### Asset Lookup
+
+```typescript
+// Asset lookup by CMS asset_id
+const ASSET_MAP: Record<string, string> = {
+  // Flavors
+  'flavor-vanilla': '/assets/flavors/vanilla.png',
+  'flavor-chocolate': '/assets/flavors/chocolate.png',
+  // ... (could also generate from convention: `/assets/${type}/${id}.png`)
+
+  // Customers
+  'customer-regular-1': '/assets/customers/regular-1.png',
+  'customer-curious-1': '/assets/customers/curious-1.png',
+
+  // Actions
+  'action-camera': '/assets/actions/camera.png',
+  // ...
+};
+
+function getAssetUrl(assetId: string): string {
+  return ASSET_MAP[assetId] || `/assets/fallback.png`;
+}
+
+// Or use convention over configuration:
+function getAssetUrl(type: string, id: string): string {
+  return `/assets/${type}/${id}.png`;
+}
+```
+
+**Why static files?**
+- Game content doesn't change dynamically
+- Fast loading (bundled, no network calls)
+- Simpler deployment
+- Can migrate to Supabase Storage later if needed
+
+### Game State Tables (Per-Player)
+
+```sql
+-- Saved games (for persistence/continuation)
+CREATE TABLE saved_games (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),
+  game_state JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Optional: player stats for analytics
+CREATE TABLE player_stats (
+  user_id UUID PRIMARY KEY REFERENCES auth.users(id),
+  games_played INTEGER DEFAULT 0,
+  games_won INTEGER DEFAULT 0,
+  days_survived INTEGER DEFAULT 0,
+  workers_lost_total INTEGER DEFAULT 0
+);
+```
+
+---
+
+## 3. Agent Interaction: State Outcomes
+
+### The Model
+
+Agent interactions don't have "thwart" or "accept" as coded decisions.
+**What matters is the state change that results.**
+
+### Interaction Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  AGENT ARRIVES                                               │
+│                                                             │
+│  Edict: Ban Chocolate                                       │
+│  Effect: Chocolate cannot work                              │
+│                                                             │
+│  Your resistance actions: [Camera] [Sunglasses] [None]      │
+│                                                             │
+│  [ Use Camera ]    [ Leave Empty-Handed ]                  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### State Outcomes
+
+When an agent leaves, the game state updates. Here's what can change:
+
+| Action | Resulting State Changes |
+|--------|------------------------|
+| **Do nothing** | Edict takes full effect |
+| **Use Camera** | 70%: Edict blocked, 30%: Edict takes effect |
+| **Use Sunglasses** | Edict takes effect, but melt-o-meter doesn't increase |
+| **Use Ice Shield** | First violation ignored, edict otherwise applies |
+| **Use Whipped Cream Cloud** | Target hidden, edict cannot be applied |
+
+**The UI doesn't show "thwart" or "accept". It shows what happened.**
+
+### Example Outcome Display
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  The Camera flashes!                                        │
+│                                                             │
+│  The agent blinks and steps back.                           │
+│  "Paperwork... error. We'll come back with proper docs."    │
+│                                                             │
+│  Chocolate remains working.                                 │
+│  Melt-o-Meter unchanged.                                    │
+│                                                             │
+│  [ Continue ]                                               │
+└─────────────────────────────────────────────────────────────┘
+```
+
+Or:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  You had no resistance action ready.                        │
+│                                                             │
+│  The agent takes Chocolate away.                            │
+│                                                             │
+│  Chocolate removed from roster.                             │
+│  Melt-o-Meter: ██░░░ 2/5                                    │
+│                                                             │
+│  [ Collect 5 signatures to recover Chocolate ]             │
+│                                                             │
+│  [ Continue ]                                               │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Customer & Flavor Instances
+
+### Customer Creation (When Entering Queue)
+
+```typescript
+function createCustomer(archetypeId: string): CustomerInstance {
+  const archetype = getArchetype(archetypeId); // From CMS
+
+  return {
+    id: generateId(),
+    archetypeId,
+    name: generateName(archetypeId),
+    favoriteFlavor: randomFlavor(), // Rolled on entry
+    stars: rollInitialStars(),      // 0-1 initially
+    snowflakes: 0,
+    favoriteUnlocked: false,
+  };
+}
+```
+
+**The customer doesn't exist before they enter the queue.** Each is a new instance.
+
+### Flavor State (Accumulates Over Time)
+
+```typescript
+function serveFlavor(flavorId: FlavorId, customer: CustomerInstance): void {
+  const flavor = gameState.flavors[flavorId];
+
+  // Flavor gains stars from being served
+  flavor.stars += 1;
+
+  // If customer has snowflakes, flavor gains snowflakes too
+  if (customer.snowflakes > 0) {
+    flavor.snowflakes += 1;
+  }
+
+  // Customer gains loyalty
+  customer.stars = Math.min(customer.stars + 1, 5);
+  customer.favoriteUnlocked = customer.stars >= 3;
+}
+```
+
+**Flavors accumulate state** - they get more popular (stars) and more targeted (snowflakes) as the game progresses.
+
+### Why This Matters
+
+| Aspect | Reason |
+|--------|--------|
+| Customer instances | Each customer is unique, with their own loyalty/snowflakes |
+| Flavor instances | Workers grow/popularity based on serves; snowflakes make them targets |
+| Favorite flavor rolled | Varies naturally; not predetermined |
+| Simple CMS | Archetypes are templates, not instances |
+
+---
+
+## 5. Existing Code Analysis (~/dev/icecream)
+
+### What to THROW OUT
+
+| File | Reason |
+|------|--------|
+| `src/types/encounter.ts` | Complex encounter types, old conversation model |
+| `src/types/dialogue.ts` | Complex dialogue trees, not needed |
+| `src/lib/encounter-generator/` | **Entire directory** - procedural generation, tone validation, dialogue flows - all built for old complex design |
+| `src/lib/dialogue-flow/` | Conversation flow system |
+| `src/lib/dialogue/` | Dialogue management |
+| `src/lib/system-adapter/` | Old system adapter |
+| `src/lib/simulation-harness/` | Old simulation approach |
+| `supabase/migrations/001_cms_schema.sql` | Old schema (customers table, encounters table) |
+
+### What to KEEP or ADAPT
+
+| File | Reason |
+|------|--------|
+| `src/types/core.ts` | Base types (flavors, phases), but simplify |
+| `src/lib/game-engine/loop.ts` | Main loop structure, adapt |
+| `src/lib/queue-generator.ts` | Queue generation, simplify |
+| `src/lib/math-utils.ts` | RNG utilities |
+| `src/lib/redis.ts` | Redis for caching |
+| `src/lib/supabase*.ts` | Supabase client setup |
+| `src/lib/store/` | Zustand store structure |
+| Testing infrastructure | Vitest, Playwright |
+
+### What to BUILD NEW
+
+| Feature | Notes |
+|---------|-------|
+| Simplified game state types | See section 1 |
+| Customer generator | Roll favorites on entry from archetype template |
+| Agent generator | **Simple** - assign edict type + target + dialogue template (replaces entire encounter-generator/) |
+| Resistance action effects | See `specs/resistance-actions.md` |
+| Edict system | See `specs/edicts-system.md` |
+| Debug mode | Save/load state |
+| Shop system | All tabs |
+| Win condition | Bill of Rights flow |
+
+---
+
+## 6. Phased Implementation
+
+### Phase 0: Foundation + Data Model (1-2 days)
 
 **Tasks**:
-- [ ] Move working code from `polecats/nux/icecream` to rig root
-- [ ] Verify all migrations are ordered correctly
-- [ ] Consolidate duplicate migrations (004/005 conflicts noted in git history)
-- [ ] Ensure Redis connection is configured for production
+- [ ] Define simplified TypeScript types
+- [ ] Set up new Supabase migrations (simplified schema)
+- [ ] Game state structure (Zustand store)
+- [ ] Debug mode: save/load to localStorage
+- [ ] Admin page for debug saves
 
 **Deliverables**:
-- Clean repository structure at `/Users/jb/gt/icecream/`
-- Verified migration order (001-009 sequentially)
-- Redis connection working
-
-**Can run in parallel with**: Phase 1
-
-**Blocking**: Nothing critical - can be done alongside other work
+- Clean types
+- Working debug save/load
+- Can save/restore game state
 
 ---
 
-### Phase 1: Core Game Mechanics
+### Phase 1: Core Loop (2-3 days)
 
-**Depends on**: Phase 0 (optional, for clean repo)
-
-**Components**:
-
-#### 1.1 Resistance Actions System
-- Define all resistance action types (Camera, Dessert Wand, Sunglasses, etc.)
-- Snowflake costs per action
-- Effect definitions (what each action does to agent encounters)
-- One-use consumable behavior
-
-#### 1.2 Snowflake Transfer Mechanics
-- Customer snowflake → served flavor transfer
-- Shop snowflake accounting
-- Signature collection snowflake rewards
-
-#### 1.3 Edicts/Proclamations Enforcement
-- Proclamation types implementation (ban topping, ban flavor, steal worker, etc.)
-- Effect tracking (what happens if violated vs complied)
-- Duration management (temporary vs permanent)
-
-#### 1.4 Melt-o-Meter Game Over
-- 0-5 scale implementation
-- Game over trigger at 5
-- Visual feedback
-
-#### 1.5 Win Condition
-- Bill of Rights purchase (50 social influence unlock)
-- Signature collection (10 customers × 5 stars each)
-- Presentation to King Cone
-- Victory screen
-
-**Sub-docs needed**:
-- `docs/specs/resistance-actions.md`
-- `docs/specs/edicts-system.md`
-- `docs/specs/win-conditions.md`
+**Tasks**:
+- [ ] Queue generator (customers with rolled favorites)
+- [ ] Agent generator (simple edict assignment)
+- [ ] Main game loop (morning → queue → interactions → end of day)
+- [ ] Basic customer interaction (serve → gain stars)
+- [ ] Basic agent interaction (edict → state change)
+- [ ] Melt-o-meter tracking
+- [ ] **End-of-day summary screen** (see spec below)
 
 **Deliverables**:
-- Complete resistance actions in game engine
-- Edict enforcement working
-- Win/lose conditions implemented
-
-**Blocking**: Phase 2, Phase 3, Phase 4
+- Playable skeleton
+- Can serve customers
+- Agents arrive, edicts happen
+- Daily summary shows what happened
 
 ---
 
-### Phase 2: Shop System
+### Phase 2: Resistance Actions (2 days)
 
-**Depends on**: Phase 1 (needs costs, effects defined)
-
-**Components**:
-
-#### 2.1 Flavors Tab
-- Display owned flavors
-- Purchase new flavors (3/6/10/15/21 star costs)
-- Flavor joining dialog ("I'd love to come work with you!")
-
-#### 2.2 Toppings Tab
-- Display topping inventory
-- Purchase replenishable toppings
-  - Sprinkles: 10 stars, quantity 5
-  - Cherry: 28 stars, quantity 3
-- Consumable tracking
-
-#### 2.3 WCU Tab
-- Display available resistance actions
-- Purchase with snowflakes
-- Show snowflake balance
-
-#### 2.4 Ice Cream Social Tab
-- Community Event (10 social influence, stars/flakes cost)
-- Town Hall (25 social influence, stars/flakes cost)
-  - Protects a flavor
-- Bill of Rights (50 social influence, stars/flakes cost)
-  - Win condition unlock
-
-#### 2.5 Edicts View Tab
-- List all active proclamations
-- Type, target, duration display
-
-**Sub-docs needed**:
-- `docs/specs/shop-economy.md`
+**Tasks**:
+- [ ] Define 10 resistance actions
+- [ ] Action effect resolution
+- [ ] WCU shop tab
+- [ ] Purchase with snowflakes
+- [ ] Use during agent interaction
 
 **Deliverables**:
-- Full shop UI implemented
-- All tabs functional
-- Economy balanced
-
-**Blocking**: Phase 6 (polish)
-
-**Can run in parallel with**: Phase 3 (after Phase 1 complete)
+- Can buy and use resistance actions
+- Actions affect state outcomes
 
 ---
 
-### Phase 3: Interaction Screens
+### Phase 3: Shop System (2-3 days)
 
-**Depends on**: Phase 1 (needs mechanics defined)
-
-**Components**:
-
-#### 3.1 Customer Interaction
-- Serve flow (flavor selection, topping selection)
-- Star calculation (base + favorite + toppings)
-- Signature request (customer spends stars)
-- Snowflake transfer on serve
-- Decline option
-
-#### 3.2 Agent Interaction
-- Proclamation display
-- Comply button (accept proclamation)
-- Resist button (use resistance action from inventory)
-- Melt-o-Meter display
-- Outcome resolution
-
-#### 3.3 WCU Dialog
-- Modal for WCU member encounters
-- New resistance action announcement
-- Snowflake cost display
-- Impact description
-
-#### 3.4 Signature Collection
-- Customer star spend (2/3/4/5 based on action type)
-- Progress tracking
-- Shop snowflake gain
-- Customer snowflake gain
-
-**Sub-docs needed**:
-- `docs/specs/customer-interaction-flow.md`
-- `docs/specs/agent-interaction-flow.md`
+**Tasks**:
+- [ ] Flavors tab (purchase workers)
+- [ ] Toppings tab (consumable inventory)
+- [ ] WCU tab (already done in Phase 2)
+- [ ] Ice Cream Social tab (Bill of Rights)
+- [ ] Edicts view tab
 
 **Deliverables**:
-- All interaction screens complete
-- Flow mechanics working
-
-**Blocking**: Phase 4, Phase 6
-
-**Can run in parallel with**: Phase 2 (after Phase 1 complete)
+- Full shop working
 
 ---
 
-### Phase 4: Wave System & Difficulty Scaling
+### Phase 4: Edicts System (2 days)
 
-**Depends on**: Phase 1, Phase 3
-
-**Components**:
-
-#### 4.1 Wave Progression
-- Customer/agent ratios per wave
-- Wave 1: Mostly customers, 1 agent
-- Wave 2: More customers, 2-3 agents
-- Wave 3+: Increased density
-- Wave N (final): Survival mode
-
-#### 4.2 King Cone Proclamation System
-- Periodic announcements
-- Proclamation selection logic
-- Edict creation
-
-#### 4.3 Difficulty Scaling per Phase
-- Phase 1 (open-operation): Few bans, rare agents
-- Phase 2 (selective-enforcement): Bans increase, visibility rises
-- Phase 3 (procedural-conflict): Agents dominate
-- Phase 4 (constraint-saturation): Many workers gone, survival
-
-#### 4.4 Targeting Logic
-- High-snowflake customers targeted more
-- 3+ snowflakes → warning likely
-- 5 stars → customer can be stolen
-- Popular flavors targeted more
-
-**Sub-docs needed**:
-- `docs/specs/wave-scaling.md`
-- `docs/specs/targeting-algorithm.md`
+**Tasks**:
+- [ ] 8 edict types
+- [ ] Edict effects on game state
+- [ ] Petition to remove
+- [ ] Targeting logic
 
 **Deliverables**:
-- Wave system implemented
-- Difficulty scaling balanced
-- Targeting working as designed
-
-**Blocking**: Phase 6, Phase 7
+- All edicts working
+- Can petition for recovery
 
 ---
 
-### Phase 5: Social Feed Integration
+### Phase 5: Win Condition (1-2 days)
 
-**Depends on**: Phase 1
-
-**Components**:
-
-#### 5.1 Discord Sync
-- Bot or webhook for pinned messages
-- Message parsing and storage
-- Display in game feed
-
-#### 5.2 Feed UI Component
-- Activity feed display
-- Source indicators (Discord, WCU, King Cone, customers, ICA)
-- Scroll functionality
-
-#### 5.3 Social Influence Tracking
-- Feed activity → influence points
-- Threshold tracking (10, 25, 50)
-- Unlock notifications
-
-#### 5.4 Feed Activity → Influence Conversion
-- Define point values per activity type
-- Time decay (if any)
-
-**Sub-docs needed**:
-- `docs/specs/social-feed-integration.md`
+**Tasks**:
+- [ ] Social influence tracking
+- [ ] Bill of Rights unlock (50 influence)
+- [ ] Purchase (100 stars + 20 snowflakes)
+- [ ] Signature collection
+- [ ] Victory
 
 **Deliverables**:
-- Discord integration working
-- Feed displaying
-- Social influence affecting unlocks
-
-**Blocking**: Phase 6
-
-**Can run in parallel with**: Phase 2, 3, 4
+- Can win the game
 
 ---
 
-### Phase 6: Polish & UX
+### Phase 6: Waves + Balance (2-3 days)
 
-**Depends on**: Phase 2, 3, 4
-
-**Components**:
-
-#### 6.1 Missing UX Screens
-- Shop screen layout (tabbed view)
-- Edicts view design
-- WCU dialog design
-- Ice Cream Social tab design
-
-#### 6.2 End Game Screens
-- Game Over screen
-- Victory screen
-- Play Again option
-
-#### 6.3 Animations & Transitions
-- Screen transitions
-- Action feedback
-- Victory celebration
-
-#### 6.4 Accessibility
-- Keyboard navigation
-- Screen reader support
-- Color contrast
-
-**Sub-docs needed**:
-- `docs/ux/missing-screens.md`
+**Tasks**:
+- [ ] Wave scaling
+- [ ] Phase progression
+- [ ] Difficulty tuning
+- [ ] Balance adjustments
 
 **Deliverables**:
-- All screens designed and implemented
-- Smooth user experience
-- Accessible gameplay
-
-**Blocking**: Phase 7
+- Well-balanced game
 
 ---
 
-### Phase 7: Balance & Testing
+### Phase 7: Polish (2-3 days)
 
-**Depends on**: All phases
-
-**Components**:
-
-#### 7.1 Playtest Sessions
-- Human playtests
-- Feedback collection
-- Issue tracking
-
-#### 7.2 Balance Tuning
-- Star economy adjustments
-- Snowflake economy adjustments
-- Wave difficulty tuning
-- Win rate analysis
-
-#### 7.3 Test Coverage
-- E2E tests for all flows
-- Unit tests for game logic
-- Regression tests via test_definitions
-
-#### 7.4 Performance Optimization
-- Load time optimization
-- Animation smoothness
-- Database query optimization
+**Tasks**:
+- [ ] Missing screens
+- [ ] Animations
+- [ ] Accessibility
+- [ ] Final polish
 
 **Deliverables**:
-- Balanced game
-- Comprehensive test coverage
-- Production-ready performance
-
-**Blocking**: Launch
+- Complete game
 
 ---
 
-## 4. Dependency Map
+## 7. Debug Mode Specification
 
-```
-                    ┌─────────────────┐
-                    │   Phase 0       │
-                    │ (Foundation)    │
-                    └────────┬────────┘
-                             │
-                ┌────────────┼────────────┐
-                │            │            │
-                ▼            ▼            ▼
-         ┌──────────┐  ┌──────────┐  ┌──────────┐
-         │ Phase 2  │  │ Phase 3  │  │ Phase 5  │
-         │ (Shop)   │  │ (Inter-  │  │ (Feed)   │
-         │          │  │  actions)│  │          │
-         └────┬─────┘  └────┬─────┘  └────┬─────┘
-              │             │             │
-              └──────┬──────┴─────────────┘
-                     ▼
-              ┌──────────────┐
-              │   Phase 1    │
-              │ (Mechanics)  │
-              └──────┬───────┘
-                     │
-              ┌──────┴───────┐
-              ▼              ▼
-       ┌──────────┐    ┌──────────┐
-       │ Phase 4  │    │ Phase 6  │
-       │ (Waves)  │    │ (Polish) │
-       └────┬─────┘    └────┬─────┘
-            │               │
-            └───────┬───────┘
-                    ▼
-              ┌──────────┐
-              │ Phase 7  │
-              │ (Balance)│
-              └──────────┘
+### API
+
+```typescript
+// Save current state
+function saveState(name: string): void;
+
+// Load saved state
+function loadState(id: string): void;
+
+// Export state (for AI testing)
+function exportState(): string;
+
+// Import state
+function importState(json: string): void;
+
+// List all saves
+function listSaves(): SavedState[];
 ```
 
-### Parallel Work Opportunities
+### Admin UI
 
-| Track | Phases | Can Run With |
-|-------|--------|--------------|
-| A | 0, 2 | Each other |
-| B | 3 | Phase 2 (after Phase 1) |
-| C | 5 | Phase 2, 3, 4 (independent until integration) |
-| D | 4 | Phase 2, 3 (after Phase 1) |
-
----
-
-## 5. Required Sub-Docs
-
-| Doc | For Phase | Priority | Assigned To |
-|-----|-----------|----------|-------------|
-| `docs/specs/resistance-actions.md` | 1 | HIGH | Game Design |
-| `docs/specs/edicts-system.md` | 1 | HIGH | Game Design |
-| `docs/specs/win-conditions.md` | 1 | HIGH | Game Design |
-| `docs/specs/shop-economy.md` | 2 | MEDIUM | Game Balance |
-| `docs/specs/customer-interaction-flow.md` | 3 | MEDIUM | UX/Impl |
-| `docs/specs/agent-interaction-flow.md` | 3 | MEDIUM | UX/Impl |
-| `docs/specs/wave-scaling.md` | 4 | MEDIUM | Game Balance |
-| `docs/specs/targeting-algorithm.md` | 4 | LOW | Systems |
-| `docs/specs/social-feed-integration.md` | 5 | LOW | Backend |
-| `docs/ux/missing-screens.md` | 6 | MEDIUM | UX |
+```
+┌────────────────────────────────────────────┐
+│  Debug Mode                                │
+│                                            │
+│  Save: [ Save ]  Name: _______________     │
+│                                            │
+│  Saved States:                             │
+│  • Day 5, 3 workers   [Load] [Delete]      │
+│  • Before agent...    [Load] [Delete]      │
+│                                            │
+│  Quick Actions:                            │
+│  [+1000 Stars] [+50 Flakes] [Skip Day]     │
+│                                            │
+│  Export/Import:                             │
+│  [ Export All ]  [ Import JSON ]            │
+└────────────────────────────────────────────┘
+```
 
 ---
 
-## 6. Immediate Next Steps
+## 8. End-of-Day Summary
 
-1. **Create sub-docs** for Phase 1 specifications
-   - `docs/specs/resistance-actions.md` - Define all actions, costs, effects
-   - `docs/specs/edicts-system.md` - Proclamation types, effects, durations
-   - `docs/specs/win-conditions.md` - Bill of Rights flow, victory conditions
+### Purpose
 
-2. **Move code** from `polecats/nux/icecream` to rig root
-   - Consolidate working code
-   - Verify migrations
+Show the player what happened during the day/round. Provides feedback on progress and consequences of choices.
 
-3. **File new beads** for each phase with clear dependencies
-   - ic-XXX for Phase 1
-   - ic-XXX for Phase 2, etc.
+### Timing
+
+Shown after the queue is empty and all interactions are resolved.
+
+```
+Queue empty → Day complete → Show summary → Start next day
+```
+
+### Screen Layout
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  END OF DAY: 5                                               │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  RESOURCES TODAY                                    │   │
+│  │  ┌────────────────┐  ┌────────────────┐            │   │
+│  │  │ ⭐ +24 Stars    │  │ ❄️ +3 Snowflakes │            │   │
+│  │  └────────────────┘  └────────────────┘            │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  NEW BANS                                           │   │
+│  │  🚫 Cherry is banned (3 days)                       │   │
+│  │  🚫 Sprinkles are banned (5 days)                    │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  EXPIRED BANS                                       │   │
+│  │  ✅ Chocolate ban has expired                        │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  WORKERS TAKEN                                      │   │
+│  │  😿 Strawberry was taken (need 5 signatures)        │   │
+│  │  😿 Pistachio was taken (need 5 signatures)         │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  WORKERS RECOVERED                                  │   │
+│  │  😊 Vanilla has returned (petition successful!)      │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  CURRENT STATUS                                     │   │
+│  │  Workers present: 4 of 6                            │   │
+│  │  Melt-o-Meter: ██░░░ 2/5                            │   │
+│  │  Social Influence: 27/100                           │   │
+│  │  Bill of Rights progress: 3/10 signatures            │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  [ CONTINUE TO DAY 6 ]                                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Section Details
+
+#### Resources Today
+- Stars gained (total from serves)
+- Snowflakes gained (from signatures)
+
+#### New Bans
+- Edicts that were applied during the day
+- Shows duration if temporary
+
+#### Expired Bans
+- Edicts that have run their course
+- Flavor/customer can return (unless stolen)
+
+#### Workers Taken
+- Which workers were removed
+- Signature requirement to recover
+
+#### Workers Recovered
+- Which workers returned via petition
+- Celebratory message
+
+#### Current Status
+- Workers present count
+- Melt-o-Meter level
+- Social Influence progress
+- Bill of Rights progress (if active)
+
+### Data Structure
+
+```typescript
+interface DaySummary {
+  day: number;
+
+  // Resources gained today
+  starsGained: number;
+  snowflakesGained: number;
+
+  // Edict changes
+  newEdicts: ActiveEdict[];
+  expiredEdicts: ActiveEdict[];
+
+  // Worker changes
+  workersTaken: FlavorId[];
+  workersRecovered: FlavorId[];
+  workersPresent: FlavorId[];
+
+  // Current state
+  meltOMeter: number;
+  socialInfluence: number;
+  billOfRightsProgress?: {
+    active: boolean;
+    signatures: number;
+    required: number;
+  };
+}
+```
+
+### Skip Option
+
+For faster playtesting, add a "Skip" button in debug mode:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  END OF DAY: 5                                               │
+│  ...summary content...                                       │
+│                                                             │
+│  [ CONTINUE TO DAY 6 ]    [ SKIP (debug only) ]             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 7. Notes
+## 9. Immediate Next Steps
 
-- This is **NOT a greenfield rewrite** - completing existing implementation
-- Core infrastructure is solid
-- Main gaps are content specs (resistance actions, edicts) and UX completion
-- Code in `polecats/nux/icecream` should be moved to rig root before major new work
+1. Create simplified Supabase migration (clean slate)
+2. Define new TypeScript types
+3. Implement debug save/load
+4. Build customer generator (roll favorites on entry)
+5. Build agent generator (simple edict assignment)
+
+---
+
+## 9. Open Questions
+
+1. **Persistence**: Should we persist game state to Supabase or just localStorage?
+2. **Analytics**: Do we want player stats tracking?
+3. **Social Feed**: Discord integration for v1 or defer?
+4. **Mobile**: Is mobile web a target?
