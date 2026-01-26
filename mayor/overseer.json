@@ -1,0 +1,8 @@
+{
+  "type": "overseer",
+  "version": 1,
+  "name": "JB",
+  "email": "jonathan@awellhealth.com",
+  "username": "jonathan",
+  "source": "git-config"
+}
