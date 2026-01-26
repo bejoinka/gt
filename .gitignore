@@ -49,8 +49,29 @@
 .vscode/
 .idea/
 
+.next/
+next-env.d.ts
+node_modules/
+*.tsbuildinfo
+# =============================================================================
+# General patterns to ignore (can be overridden below)
+# =============================================================================
+*.local*
+**/env.*
+!**.env.example*
+tmp/
+
 # =============================================================================
 # Explicitly track (override above patterns)
 # =============================================================================
 # Note: .beads/ has its own .gitignore that handles SQLite files
 # and keeps issues.jsonl, metadata.json, config file as source of truth
+
+
+!**/.beads/
+!**/crew/.beads/
+!**/mayor/rig/.beads/
+!**/refinery/rig/.beads/
+!**/polecats/.beads/
+!**/dogs/.beads/
+
